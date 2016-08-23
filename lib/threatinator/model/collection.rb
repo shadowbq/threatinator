@@ -67,6 +67,12 @@ module Threatinator
         @collection.each { |v| yield v }
       end
 
+      def list
+        @collection.to_a.collect {|item|
+          item.to_s
+        }
+      end
+
       def ==(other)
         if self.equal?(other)
           return true

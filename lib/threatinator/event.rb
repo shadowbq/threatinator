@@ -18,6 +18,8 @@ module Threatinator
     validates :fqdns, type: Threatinator::Model::Observables::FqdnCollection
     validates :urls, type: Threatinator::Model::Observables::UrlCollection
 
+    EventHeader = Struct.new(:feed_provider, :feed_name, :type)
+
     # @param [Hash] opts
     # @option opts [String] :feed_provider The name of the feed provider
     # @option opts [String] :feed_name The name of the feed
@@ -33,6 +35,10 @@ module Threatinator
       @fqdns = Threatinator::Model::Observables::FqdnCollection.new(opts[:fqdns] || [])
       @urls = Threatinator::Model::Observables::UrlCollection.new(opts[:urls] || [])
       super()
+    end
+
+    def header
+      event_header = EventHeader.new(@feed_provider, @feed_name, @type)
     end
   end
 end
