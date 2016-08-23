@@ -17,6 +17,6 @@ parse_eachline(:separator => "\n") do |event_generator, record|
   event_generator.call() do |event|
     event.type = :malware_host
     event.add_url(url) do |url_event|
-	end
+    end
   end
 end

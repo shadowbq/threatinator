@@ -7,8 +7,8 @@ module Threatinator
   module Fetchers
     class Http < Threatinator::Fetcher
       attr_reader :url
-      # @param [Hash] opts An options hash. 
-      # @option opts [Addressable::URI] :url The URL that is to be fetched 
+      # @param [Hash] opts An options hash.
+      # @option opts [Addressable::URI] :url The URL that is to be fetched
       #   (required)
       #
       def initialize(opts = {})
@@ -24,8 +24,9 @@ module Threatinator
       # @raise [Threatinator::Exceptions::FetchFailed] if the fetch fails
       def fetch
         tempfile = Tempfile.new("threatinator_http")
-        request = Typhoeus::Request.new(@url, 
-                                        ssl_verifypeer: false, 
+        request = Typhoeus::Request.new(@url,
+                                        ssl_verifypeer: false,
+                                        followlocation: true,
                                         forbid_reuse: true
                                        )
         request.on_headers do |response|
