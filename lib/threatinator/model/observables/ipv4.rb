@@ -23,8 +23,11 @@ module Threatinator
           @ipv4 = opts.delete(:ipv4)
           super()
         end
+
+        def to_s
+          return ipv4.to_s
+        end
       end
     end
   end
 end
-

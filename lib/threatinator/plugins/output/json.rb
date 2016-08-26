@@ -1,11 +1,9 @@
 require 'threatinator/output'
 require 'multi_json'
-require 'pry'
-
+#require 'pry'
 module Threatinator
   module Plugins
     module Output
-
 
       class Json < Threatinator::Output
         #include JSONHelpers
