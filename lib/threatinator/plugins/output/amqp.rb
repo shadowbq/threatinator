@@ -1,7 +1,11 @@
 require 'threatinator/output'
 require 'bunny'
-require 'cikl/event'
 require 'multi_json'
+
+# bundle exec threatinator run --run.output.amqp.url=#{ENV['RABBITMQ_URL']} --run.output.format=amqp #{provider} #{name}"
+#    --run.output.amqp.routing_key=arg   - Routing key for Amqp events (default: none)
+#    --run.output.amqp.url=arg           - The hostname/ip of the RabbitMQ server (default: none)
+
 
 module Threatinator
   module Plugins
