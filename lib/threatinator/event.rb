@@ -44,18 +44,18 @@ module Threatinator
     def to_serializable_hash
 
       ret = {
-        import_time: Time.now,
+        import_time: Time.now.utc.to_i,
         feed_provider: @feed_provider,
         feed_name: @feed_name,
         source: 'threatinator'
       }
       if @type
-        ret[:tags] << @type.to_s
+        ret[:tags] = @type.to_s
       end
 
-      ret[:ipv4s] << @ipv4s.list
-      ret[:fqdns] << @fqdns.list
-      ret[:urls] << @urls.list
+      ret[:ipv4s] = @ipv4s.list
+      ret[:fqdns] = @fqdns.list
+      ret[:urls] = @urls.list
       ret
     end
 
