@@ -24,11 +24,17 @@ bundle exec bin/threatinator list
 bundle exec bin/threatinator run alienvault ip_reputation
 ```
 
+### Using the AMQP output
+
 ```
 bundle exec threatinator run --run.output.amqp.url=ENV['RABBITMQ_URL']} --run.output.format=amqp provider name
 #    --run.output.amqp.routing_key=arg   - Routing key for Amqp events (default: none)
 ##        The routing key should be determined by the type
 #    --run.output.amqp.url=arg           - The hostname/ip of the RabbitMQ server (default: none)
+```
+
+```
+./bin/threatinator run --run.output.amqp.url='amqp://127.0.0.1' --run.output.format=amqp vxvault url_reputation
 ```
 
 ### Getting help
