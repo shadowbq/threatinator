@@ -2,13 +2,48 @@
 # encoding: utf-8
 require "rubygems"
 require "bunny"
+require "uri"
+require 'sqlite3'
+require 'json'
 
 if ARGV.empty?
   abort "Usage: #{$0} [binding key]"
 end
 
+
+begin
+  db = SQLite3::Database.new('/tmp/threat.db')
+  puts "DB Ready"
+rescue SQLite3::Exception => e
+  begin
+    db = SQLite3::Database.open('/tmp/threat.db')
+  rescue SQLite3::Exception => e
+    puts "Exception occurred"
+    puts e
+    db.close if db
+  end
+end
+
+db.execute(<<EOS)
+  CREATE TABLE IF NOT EXISTS fqdns (
+    id INTEGER PRIMARY KEY,
+    feed_provider varchar(255),
+    feed_name varchar(255),
+    import_time timestamp default (strftime('%s', 'now')),
+    name varchar(255),
+    CONSTRAINT name_unique UNIQUE (import_time, name)
+  )
+EOS
+
+
+stmt = db.prepare(<<EOS)
+  INSERT INTO fqdns(import_time, name, feed_provider, feed_name) VALUES(:import_time, :name, :feed_provider, :feed_name)
+EOS
+
 conn = Bunny.new(:hostname => '127.0.0.1', :automatically_recover => false)
 conn.start
+
+puts "AMQP Ready"
 
 ch  = conn.create_channel
 x   = ch.topic("threats")
@@ -19,14 +54,46 @@ ARGV.each do |severity|
 end
 
 puts " [*] Waiting for events. To exit press CTRL+C"
+dnslist = []
 
 begin
+
   q.subscribe(:block => true) do |delivery_info, properties, body|
-    puts " [x] #{delivery_info.routing_key}:#{body}"
+    #puts " [x] #{delivery_info.routing_key}:#{body}"
+    #myUri = URI.parse( 'http://www.mglenn.com/directory' )
+    #{"import_time":1476716444,"feed_provider":"vxvault","feed_name":"url_reputation","source":"threatinator","tags":"malware_host","ipv4s":[],"fqdns":[],"urls":["http://103.234.37.4/rd927.exe"]}
+    begin
+      # Extract FQDN
+      dataset = JSON.parse(body)
+      dataset["urls"].each do |v|
+        host = URI.parse(v).host
+        #puts host
+        if  (/[A-Za-z]/.match(host) && !(/[ ]/.match(host)))
+          dnslist << host
+          begin
+            stmt.execute( :import_time => dataset["import_time"], :name => host, :feed_provider => dataset["feed_provider"], :feed_name => dataset["feed_name"] )
+          rescue SQLite3::ConstraintException
+            print "-"
+          end
+        end
+      end
+      dataset["fqdns"].each do |v|
+        dnslist << v
+        begin
+          stmt.execute( :import_time => dataset["import_time"], :name => host, :feed_provider => dataset["feed_provider"], :feed_name => dataset["feed_name"] )
+        rescue SQLite3::ConstraintException
+          print "-"
+        end
+      end
+      print "."
+    end
   end
 rescue Interrupt => _
   ch.close
   conn.close
-
+  stmt.close
+  db.close
+  dnslist = dnslist.sort.uniq
+  puts "Found #{dnslist.size}: FQDNs."
   exit(0)
 end
