@@ -19,8 +19,8 @@ else
     gem.name = "shadowbq-threatinator"
     gem.homepage = "http://github.com/shadowbq/threatinator"
     gem.license = "LGLv3"
-    gem.summary = %Q{Threatinator is a library and tool for parsing threat data feeds.}
-    gem.description = gem.summary
+    gem.summary = %Q{Shadowbq-Threatinator is a library and tool for parsing threat data feeds.}
+    gem.description = "This is a fork of the cikl/threatinator project"
     gem.email = "shadowbq@gmail.com"
     gem.authors = ["Mike Ryan", "Pierre Lamy", "Scott MacGregor"]
     gem.files  =
