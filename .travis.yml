@@ -7,7 +7,7 @@ rvm:
 - ruby-head
 - jruby-head
 jdk:
-  - openjdk8
+  - openjdk7
   - oraclejdk8
 matrix:
   exclude:
