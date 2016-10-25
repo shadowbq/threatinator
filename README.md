@@ -1,10 +1,12 @@
-# Threatinator
+# Shadowbq-Threatinator
 
-Threatinator is a ruby library for parsing threat data feeds. It is a component of [Cikl](https://github.com/cikl/cikl), a threat intelligence management system.
+Threatinator is a ruby library for parsing threat data feeds.
+
+This is a fork published as `shadowbq-threatinator`
 
 ## Source code repository
 
-The repository is located at: https://github.com/cikl/threatinator
+The repository is located at: https://github.com/shadowbq/threatinator
 
 ## Development
 
