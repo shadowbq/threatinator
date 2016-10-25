@@ -20,6 +20,16 @@ bundle install
 
 ```
 bundle exec bin/threatinator list
+provider           name                                 type  link/path                                                                            event_types                                     
+-----------------  -----------------------------------  ----  ------------------------------------------------------------------------------------ ------------------------------------------------
+abuse_ch           feodo_domain_reputation              http  https://feodotracker.abuse.ch/blocklist.php?download=domainblocklist                 [:c2]                                           
+abuse_ch           feodo_ip_reputation                  http  https://feodotracker.abuse.ch/blocklist.php?download=ipblocklist                     [:c2]                                           
+[..]
+alienvault         ip_reputation                        http  https://reputation.alienvault.com/reputation.generic                                 [:scanning, :attacker, :malware_host, :spamming]
+arbor              fastflux_domain_reputation           http  http://atlas.arbor.net/summary/domainlist                                            [:c2]                                           
+arbor              ssh_ip_reputation                    http  http://atlas-public.ec2.arbor.net/public/ssh_attackers                               [:scanning]                                     
+autoshun           shunlist                             http  http://www.autoshun.org/files/shunlist.csv                                           [:scanning]                                     
+
 ```
 
 ### Running a feed
