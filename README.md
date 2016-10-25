@@ -80,12 +80,11 @@ COMMAND OPTIONS
 
 ## Contributing and Issue Tracking
 
-Before you file a bug or submit a pull request, please review our
-[contribution guidelines](https://github.com/cikl/cikl/wiki/Contributing).
+All issues for the fork are managed here: [shadowbq/threatinator/issues](https://github.com/shadowbq/threatinator/issues).
 
-All issues are managed here: [cikl/threatinator/issues](https://github.com/cikl/threatinator/issues).
-
-## License
+## Original License
 Copyright (C) 2014 Michael Ryan (github.com/justfalter)
+
+Original code: https://github.com/cikl/threatinator
 
 See the LICENSE file for license rights and limitations (LGPLv3).
