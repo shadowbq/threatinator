@@ -1,6 +1,7 @@
 provider "abuse_ch"
 name "zeus_domain_reputation"
 fetch_http('https://zeustracker.abuse.ch/blocklist.php?download=domainblocklist')
+event_types [:c2]
 
 feed_re = /^(?<domain>.*)/
 

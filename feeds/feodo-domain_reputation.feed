@@ -1,6 +1,7 @@
 provider "abuse_ch"
 name "feodo_domain_reputation"
 fetch_http('https://feodotracker.abuse.ch/blocklist.php?download=domainblocklist')
+event_types [:c2]
 
 feed_re = /^(?<domain>.*)/
 

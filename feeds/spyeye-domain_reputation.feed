@@ -1,7 +1,7 @@
 provider "abuse_ch"
 name "spyeye_domain_reputation"
 fetch_http('https://spyeyetracker.abuse.ch/blocklist.php?download=domainblocklist')
-
+event_types [:c2]
 feed_re = /^(?<domain>.*)/
 
 filter_whitespace

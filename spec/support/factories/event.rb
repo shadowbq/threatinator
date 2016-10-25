@@ -1,4 +1,5 @@
 require 'threatinator/event'
+require 'threatinator/event_builder'
 
 FactoryGirl.define do
   factory :event, class: Threatinator::Event do
@@ -7,19 +8,22 @@ FactoryGirl.define do
     type :scanning
     ipv4s { [ ] }
     fqdns { [ ] }
+    urls  { [ ] }
 
     initialize_with { 
-      ret = new() 
-      ret.feed_name = feed_name
-      ret.feed_provider = feed_provider
-      ret.type = type
+      builder = Threatinator::EventBuilder.new(feed_provider, feed_name)
+      builder.type = type
+
       ipv4s.each do |ipv4|
-        ret.add_ipv4(ipv4)
+        builder.add_ipv4(ipv4)
       end
       fqdns.each do |fqdn|
-        ret.add_fqdn(fqdn)
+        builder.add_fqdn(fqdn)
       end
-      ret
+      urls.each do |url|
+        builder.add_url(url)
+      end
+      builder.build
     }
   end
 end

@@ -1,6 +1,8 @@
 provider "blocklist_de"
 name "apache_ip_reputation"
 fetch_http('http://www.blocklist.de/lists/apache.txt')
+event_types [:scanning]
+
 
 feed_re = /^(?<ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/
 

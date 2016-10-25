@@ -30,12 +30,9 @@ module Threatinator
     end
     
     class InvalidAttributeError < StandardError
-      attr_reader :attribute, :got
-      def initialize(attribute, got)
-        @attribute = attribute
-        @got = got
-        super("Invalid value for attribute '#{attribute}'. Got " + got.inspect)
-      end
+    end
+
+    class EventBuildError < StandardError
     end
 
     class AlreadyRegisteredError < StandardError

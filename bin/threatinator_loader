@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+$:.unshift File.expand_path("../../lib", __FILE__)
+require 'json'
+require 'pry'
+path = './valid.json'
+json = File.open(path,'r:utf-8',&:read) # in case the JSON uses UTF-8
+dataset = JSON.parse(json)
+
+# See interesting link here
+# http://stackoverflow.com/questions/36440683/merge-duplicate-values-in-json-using-ruby
+items = dataset['items'].inject{|sum, e| sum.merge(e){|k,o,n| n+o}  }
+
+
+# dataset["header"]["type"]
+# "malware_host"
+# dataset["header"]["feed_name"]
+# "url_reputation"
+# items["urls"].size
+
+binding.pry
+puts 'done'

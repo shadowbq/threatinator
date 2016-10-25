@@ -1,6 +1,7 @@
 provider "cruzit"
 name "ip_reputation"
 fetch_http('http://www.cruzit.com/xwbl2txt.php')
+event_types [:scanning]
 
 feed_re = /^(?<ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/
 

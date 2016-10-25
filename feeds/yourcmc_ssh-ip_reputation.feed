@@ -1,6 +1,7 @@
 provider "yourcmc"
 name "ssh-ip_reputation"
 fetch_http('http://vmx.yourcmc.ru/BAD_HOSTS.IP4')
+event_types [:scanning]
 
 feed_re = /^(?<ip>.*)/
 

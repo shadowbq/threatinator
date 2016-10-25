@@ -1,6 +1,7 @@
 provider "malc0de"
 name "domain_reputation"
 fetch_http('http://malc0de.com/bl/BOOT')
+event_types [:malware_host]
 
 feed_re = /^PRIMARY (?<domain>[a-z,0-9,A-Z,\-,\.]*)/
 

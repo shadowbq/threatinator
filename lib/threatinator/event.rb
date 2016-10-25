@@ -1,28 +1,63 @@
-require 'threatinator/property_definer'
+require 'threatinator/model/base'
+require 'threatinator/model/observables/ipv4_collection'
+require 'threatinator/model/observables/fqdn_collection'
+require 'threatinator/model/observables/url_collection'
+require 'equalizer'
 require 'set'
 
 module Threatinator
-  class Event
-    include Threatinator::PropertyDefiner
+  class Event < Threatinator::Model::Base
+    include Equalizer.new(:feed_provider, :feed_name, :type, :ipv4s, :fqdns, :urls)
+    attr_reader :feed_provider, :feed_name, :type, :ipv4s, :fqdns, :urls
 
     VALID_TYPES = Set.new([:c2, :attacker, :malware_host, :spamming, :scanning, :phishing])
 
+    validates :feed_provider, :feed_name, type: ::String
+    validates :type, type: ::Symbol, allow_nil: false, inclusion: {in: VALID_TYPES}
+    validates :ipv4s, type: Threatinator::Model::Observables::Ipv4Collection
+    validates :fqdns, type: Threatinator::Model::Observables::FqdnCollection
+    validates :urls, type: Threatinator::Model::Observables::UrlCollection
+
+    EventHeader = Struct.new(:feed_provider, :feed_name, :type)
+
+    # @param [Hash] opts
+    # @option opts [String] :feed_provider The name of the feed provider
+    # @option opts [String] :feed_name The name of the feed
+    # @option opts [Symbol] :type The 'type' of feed.
+    # @option opts [#each] :ipv4s A collection of ipv4s
+    # @option opts [#each] :fqdns A collection of FQDNs
+    # @option opts [#each] :urls A collection of Urls
     def initialize(opts = {})
-      _parse_properties(opts)
+      @feed_provider = opts[:feed_provider]
+      @feed_name = opts[:feed_name]
+      @type = opts[:type]
+      @ipv4s = Threatinator::Model::Observables::Ipv4Collection.new(opts[:ipv4s] || [])
+      @fqdns = Threatinator::Model::Observables::FqdnCollection.new(opts[:fqdns] || [])
+      @urls = Threatinator::Model::Observables::UrlCollection.new(opts[:urls] || [])
+      super()
     end
 
-    property :feed_provider, type: String
-    property :feed_name, type: String
-    property :type, type: Symbol, validate: lambda { |obj, val| VALID_TYPES.include?(val) }
-    property :ipv4s, type: Array, default: lambda { Array.new }
-    property :fqdns, type: Array, default: lambda { Array.new }
-
-    def add_ipv4(ipv4)
-      self.ipv4s << ipv4
+    def header
+      event_header = EventHeader.new(@feed_provider, @feed_name, @type)
     end
 
-    def add_fqdn(fqdn)
-      self.fqdns << fqdn
+    def to_serializable_hash
+
+      ret = {
+        import_time: Time.now.utc.to_i,
+        feed_provider: @feed_provider,
+        feed_name: @feed_name,
+        source: 'threatinator'
+      }
+      if @type
+        ret[:tags] = @type.to_s
+      end
+
+      ret[:ipv4s] = @ipv4s.list
+      ret[:fqdns] = @fqdns.list
+      ret[:urls] = @urls.list
+      ret
     end
+
   end
 end

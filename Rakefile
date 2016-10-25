@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'bundler'
+
 begin
   Bundler.setup(:default, :development, :test)
 rescue Bundler::BundlerError => e
@@ -12,20 +13,21 @@ require 'rake'
 begin
   require 'jeweler'
 rescue LoadError
-else 
+else
   Jeweler::Tasks.new do |gem|
     # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-    gem.name = "threatinator"
-    gem.homepage = "http://github.com/cikl/threatinator"
+    gem.name = "shadowbq-threatinator"
+    gem.homepage = "http://github.com/shadowbq/threatinator"
     gem.license = "LGLv3"
     gem.summary = %Q{Threatinator is a library and tool for parsing threat data feeds.}
     gem.description = gem.summary
-    gem.email = "falter@gmail.com"
-    gem.authors = ["Mike Ryan", "Pierre Lamy"]
-    gem.files  = 
-      ['bin/threatinator'] + 
-      Dir.glob("lib/**/*.rb") + 
-      Dir.glob("spec/**/*") + 
+    gem.email = "shadowbq@gmail.com"
+    gem.authors = ["Mike Ryan", "Pierre Lamy", "Scott MacGregor"]
+    gem.files  =
+      ['bin/threatinator'] +
+      Dir.glob("lib/**/*.rb") +
+      Dir.glob("spec/**/*") +
+      Dir.glob("feeds/**/*.feed") +
       %w(CONTRIBUTING.md CHANGELOG.md LICENSE Gemfile README.md Rakefile VERSION)
 
   end
@@ -38,7 +40,7 @@ begin
 rescue LoadError
 else
   RSpec::Core::RakeTask.new(:spec) do |spec|
-    spec.pattern = FileList['spec/**/*_spec.rb']
+    spec.pattern = 'spec/**/*_spec.rb'
   end
 end
 

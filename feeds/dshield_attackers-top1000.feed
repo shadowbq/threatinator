@@ -1,6 +1,7 @@
 provider "dshield"
 name "attackers-top1000"
 fetch_http('https://isc.sans.edu/api/sources/attacks/1000/')
+event_types [:attacker]
 
 parse_xml("/sources/data") do |event_generator, record|
   node = record.node
@@ -31,4 +32,3 @@ parse_xml("/sources/data") do |event_generator, record|
     # count = count_node.text.to_i unless count_node.nil?
   end
 end
-

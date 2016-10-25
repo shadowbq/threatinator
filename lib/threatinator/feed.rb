@@ -5,20 +5,21 @@ module Threatinator
     # @param [Hash] opts Options hash
     # @option opts [String] :provider The name of the provider
     # @option opts [String] :name The name of the feed
-    # @option opts [Proc] :parser_block A block that will be called by the 
+    # @option opts [Proc] :parser_block A block that will be called by the
     #   parser each time it processes a record.
-    # @option opts [Proc] :parser_builder A proc that, when called, will 
+    # @option opts [Proc] :parser_builder A proc that, when called, will
     #   return a brand new instance of a Threatinator::Parser.
-    # @option opts [Proc] :fetcher_builder A proc that, when called, will 
+    # @option opts [Proc] :fetcher_builder A proc that, when called, will
     #   return a brand new instance of a Threatinator::Fetcher.
-    # @option opts [Array<Proc>] :filter_builders An array of procs that, 
-    #   when called, will each return an instance of a filter (something that 
+    # @option opts [Array<Proc>] :filter_builders An array of procs that,
+    #   when called, will each return an instance of a filter (something that
     #   responds to :filter?)
-    # @option opts [Array<Proc>] :decoder_builders An array of procs that, 
+    # @option opts [Array<Proc>] :decoder_builders An array of procs that,
     #   when called, will each return an instance of a Threatinator::Decoder
     def initialize(opts = {})
       @provider = opts.delete(:provider)
       @name = opts.delete(:name)
+      @event_types = opts.delete(:event_types)
       @parser_block = opts.delete(:parser_block)
 
       @parser_builder = opts.delete(:parser_builder)
@@ -34,6 +35,10 @@ module Threatinator
 
     def name
       @name.dup
+    end
+
+    def event_types
+      @event_types.dup
     end
 
     def parser_block
@@ -59,6 +64,7 @@ module Threatinator
     def validate!
       validate_attribute!(:provider, @provider) { |x| x.kind_of?(::String) }
       validate_attribute!(:name, @name) { |x| x.kind_of?(::String) }
+      validate_attribute!(:event_types, @event_types) { |x| x.kind_of?(::Array) }
       validate_attribute!(:parser_block, @parser_block) { |x| x.kind_of?(::Proc) }
       validate_attribute!(:fetcher_builder, @fetcher_builder) { |x| x.kind_of?(::Proc) }
       validate_attribute!(:parser_builder, @parser_builder) { |x| x.kind_of?(::Proc) }
@@ -75,7 +81,7 @@ module Threatinator
 
     def validate_attribute!(name, val, &block)
       unless block.call(val) == true
-        raise Threatinator::Exceptions::InvalidAttributeError.new(name, val)
+        raise Threatinator::Exceptions::InvalidAttributeError.new("Invalid attribute (#{name}). Got: #{val.inspect}")
       end
     end
   end

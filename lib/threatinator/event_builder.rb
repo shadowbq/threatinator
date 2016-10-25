@@ -1,41 +1,70 @@
 require 'threatinator/event'
+require 'threatinator/exceptions'
+require 'threatinator/model/observables/ipv4'
+require 'ip'
 
 module Threatinator
   class EventBuilder
-    attr_reader :total
-    def initialize(feed)
-      @feed = feed
-      @built_events = []
-      @total = 0
+    attr_writer :type
+
+    def initialize(feed_provider, feed_name)
+      @feed_provider = feed_provider
+      @feed_name = feed_name
+      self.reset
     end
 
-    def each_built_event
-      @built_events.each do |event|
-        yield event
+    def reset
+      @type = nil
+      @ipv4s = []
+      @fqdns = []
+      @urls = []
+    end
+
+    def build
+      opts = {
+        feed_provider: @feed_provider,
+        feed_name: @feed_name,
+      }
+      opts[:type] = @type unless @type.nil?
+
+      ret = Threatinator::Event.new(opts)
+
+      @ipv4s.each do |ipv4, opts|
+        opts = opts.dup
+        if ipv4.is_a?(::String)
+          ipv4 = ::IP::V4.parse(ipv4)
+        end
+        opts[:ipv4] = ipv4
+        ret.ipv4s << Threatinator::Model::Observables::Ipv4.new(opts)
       end
-      @built_events.clear
+      @fqdns.each do |fqdn|
+        ret.fqdns << fqdn
+      end
+      @urls.each do |url|
+        url = begin
+          ::Addressable::URI.parse(url)
+        rescue TypeError => e
+          raise Threatinator::Exceptions::EventBuildError, "Failed to parse URL"
+        end
+        ret.urls << url
+      end
+      ret
+    rescue Threatinator::Exceptions::InvalidAttributeError => e
+      raise Threatinator::Exceptions::EventBuildError, e.message
     end
 
-    def count
-      @built_events.count
+    def add_fqdn(fqdn)
+      @fqdns << fqdn
     end
 
-    def clear
-      @built_events.clear
+    def add_ipv4(ipv4, opts = {})
+      @ipv4s << [ipv4, opts]
     end
 
-    def create_event_proc
-      self.method(:create_event).to_proc
-    end
-
-    def create_event
-      event = Threatinator::Event.new
-      event.feed_provider = @feed.provider
-      event.feed_name = @feed.name
-      yield(event)
-      @total += 1
-      @built_events << event
+    def add_url(url)
+      @urls << url
     end
   end
 end
+
 
