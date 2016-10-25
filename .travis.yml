@@ -14,7 +14,6 @@ env:
 cache: bundler
 bundler_args: "--without development --jobs 7"
 script: bundle exec rake spec
-notifications:
-  hipchat:
-    rooms:
-      secure: e8/Lff70fiEOvt1FXRaDvc1AOk1T3bZmnUkHZaci9P+ACl/lAJCYG+j2/NPiIalAciOS+nothjkOxMKmNMib8cDEEWO43q/kF6biCS8I8sR5d9QC5egAjFMSPelG885SZLcuHHMefDpF7Nk/H4IF1mb1P1xqpto4nYE+HVPEBRA=
+addons:
+    code_climate:
+        repo_token: 4a6f104d1ad380cefa6b120cbdef76640ce1630f53effa35bdf15f18973a9f25
