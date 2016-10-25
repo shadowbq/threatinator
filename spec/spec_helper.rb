@@ -2,6 +2,9 @@ require 'rubygems'
 require 'bundler'
 Bundler.setup :default, :test
 
+require "codeclimate-test-reporter"
+CodeClimate::TestReporter.start
+
 require 'pathname'
 SPEC_ROOT = Pathname.new(__FILE__).dirname.expand_path
 PROJECT_ROOT =  SPEC_ROOT.join('../').expand_path
@@ -35,7 +38,7 @@ SimpleCov.start do
   add_filter PROJECT_ROOT.join('spec').to_s
   add_filter PROJECT_ROOT.join('.gem').to_s
   add_filter PROJECT_ROOT.join('.git').to_s
-end 
+end
 
 require 'factory_girl'
 Dir.glob(SUPPORT_ROOT.join('**','*.rb')).sort.each { |f| require f}
