@@ -1,6 +1,7 @@
 provider "vxvault"
 name "url_reputation"
 fetch_http('http://vxvault.siri-urz.net/URL_List.php')
+event_types [:malware_host]
 
 filter_whitespace
 filter_comments

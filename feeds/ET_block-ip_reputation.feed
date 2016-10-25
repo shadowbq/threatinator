@@ -1,6 +1,7 @@
 provider "emergingthreats"
 name "block_ip_reputation"
 fetch_http('http://rules.emergingthreats.net/fwrules/emerging-Block-IPs.txt')
+event_types [:c2]
 
 filter_whitespace
 filter_comments

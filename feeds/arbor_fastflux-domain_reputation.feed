@@ -1,6 +1,7 @@
 provider "arbor"
 name "fastflux_domain_reputation"
 fetch_http('http://atlas.arbor.net/summary/domainlist')
+event_types [:c2]
 
 feed_re = /^(?<domain>.*)/
 

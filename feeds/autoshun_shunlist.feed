@@ -1,6 +1,8 @@
 provider "autoshun"
 name "shunlist"
 fetch_http('http://www.autoshun.org/files/shunlist.csv')
+event_types [:scanning]
+
 
 filter do |record|
   record.data[:ip].start_with?("Shunlist as of")

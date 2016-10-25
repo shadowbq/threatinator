@@ -1,6 +1,8 @@
 provider "packetmail"
 name "perimeterbad_ip_reputation"
 fetch_http('https://www.packetmail.net/iprep_perimeterbad.txt')
+event_types [:scanning]
+
 
 filter_whitespace
 filter_comments
@@ -8,7 +10,7 @@ filter_comments
 parse_eachline(:separator => "\n") do |event_generator, record|
   fields = record.data.split(/\t/)
   next if record.nil?
-  
+
   # date_time = fields[0]
   remote_ip = fields[1]
   # server_name = fields[2]

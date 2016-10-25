@@ -1,6 +1,8 @@
 provider "alienvault"
 name "ip_reputation"
 fetch_http('https://reputation.alienvault.com/reputation.generic')
+event_types [:scanning, :attacker, :malware_host, :spamming]
+
 
 # Examples:
 #  108.59.1.5 # Scanning Host A1,,0.0,0.0

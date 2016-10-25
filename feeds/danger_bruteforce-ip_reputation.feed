@@ -1,6 +1,7 @@
 provider "danger"
 name "bruteforce_ip_reputation"
 fetch_http('http://danger.rulez.sk/projects/bruteforceblocker/blist.php')
+event_types [:scanning]
 
 filter_whitespace
 filter_comments
@@ -8,7 +9,7 @@ filter_comments
 parse_eachline(:separator => "\n") do |event_generator, record|
   next if record.nil?
   fields = record.data.split(/\s/)
-  
+
   # ipv4 = fields[0]
   # last_reported_date = fields[2]
   # last_reported_time = fields[3]

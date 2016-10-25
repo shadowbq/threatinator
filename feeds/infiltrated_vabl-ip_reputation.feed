@@ -1,6 +1,7 @@
 provider "infiltrated"
 name "vabl_ip_reputation"
 fetch_http('http://www.infiltrated.net/vabl.txt')
+event_types [:scanning]
 
 filter_whitespace
 filter_comments
@@ -8,7 +9,7 @@ filter_comments
 parse_eachline(:separator => "\n") do |event_generator, record|
   fields = record.data.split(/ \| /)
   next if record.nil?
-  
+
   ip = fields[0].strip
   # reason = fields[1].strip
   # source = fields[2].strip
@@ -20,7 +21,7 @@ parse_eachline(:separator => "\n") do |event_generator, record|
   # country = fields[8].strip
   # domain = fields[9].strip
   # asname = fields[19].strip
-  
+
   event_generator.call() do |event|
     event.type = :scanning
     event.add_ipv4(ip) do |ipv4_event|

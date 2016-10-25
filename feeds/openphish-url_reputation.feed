@@ -1,6 +1,8 @@
 provider "openphish"
 name "url_reputation"
 fetch_http('http://openphish.com/feed.txt')
+event_types [:malware_host]
+
 
 filter_whitespace
 filter_comments

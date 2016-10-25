@@ -1,6 +1,7 @@
 provider "abuse_ch"
 name "feodo_ip_reputation"
 fetch_http('https://feodotracker.abuse.ch/blocklist.php?download=ipblocklist')
+event_types [:c2]
 
 feed_re = /^(?<ip>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})/
 

@@ -1,5 +1,7 @@
 provider "sigmaproject"
 name "atma_ip_reputation"
+event_types [:scanning]
+
 
 fetch_http('https://blocklist.sigmaprojects.org/api.cfc?method=getList&lists=atma')
 
@@ -16,7 +18,7 @@ parse_eachline() do |event_generator, record|
    ip = record.data
    ip.gsub!(/\/32/, '')
    ip.strip!
-   
+
    event_generator.call() do |event|
       event.type = :scanning
       event.add_ipv4(ip) do |ipv4_event|

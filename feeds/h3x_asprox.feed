@@ -1,5 +1,6 @@
 provider "h3x"
 name "asprox"
+event_types [:c2]
 
 fetch_http('http://atrack.h3x.eu/api/asprox_all.php')
 

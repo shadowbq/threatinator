@@ -1,6 +1,10 @@
 provider "sigmaproject"
 name "spyware_ip_reputation"
 
+event_types [:c2]
+
+
+
 fetch_http('https://blocklist.sigmaprojects.org/api.cfc?method=getList&lists=spyware')
 extract_gzip
 

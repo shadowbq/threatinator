@@ -13,8 +13,11 @@ module Threatinator
         end
 
         def output_table(io_out)
-          feed_info = [['provider', 'name', 'type', 'link/path']]
+
+          feed_info = [['provider', 'name', 'type', 'link/path', 'event_types']]
+
           registry.each do |feed|
+            #binding.pry
             info = [ feed.provider, feed.name ]
             fetcher = feed.fetcher_builder.call()
             type = "unknown"
@@ -26,24 +29,31 @@ module Threatinator
             end
             info << type
             info << link
+            info << feed.event_types
             feed_info << info
           end
+
+          # This will never happen
           return if feed_info.count == 0
+
           fmts = []
           widths = []
-          0.upto(3) do |i|
-            max = feed_info.max { |a,b| a[i].length <=> b[i].length }[i].length
+          0.upto(4) do |i|
+            max = feed_info.max { |a,b| a[i].to_s.length <=> b[i].to_s.length }[i].to_s.length
             widths << max
             fmts << "%#{max}s"
           end
-          fmt = "%-#{widths[0]}s  %-#{widths[1]}s  %-#{widths[2]}s  %-#{widths[3]}s\n"
-          io_out.printf(fmt, *(feed_info.shift))
+          fmt = "%-#{widths[0]}s  %-#{widths[1]}s  %-#{widths[2]}s  %-#{widths[3]}s %-#{widths[4]}s\n"
+          io_out.printf(fmt, *(feed_info.shift)) # Pop the Header from the feed_info
+
           sep = widths.map {|x| '-' * x }
           io_out.printf(fmt, *sep)
+
           feed_info.sort! { |a,b| [a[0], a[1]] <=> [b[0], b[1]] }
           feed_info.each  do |info|
             io_out.printf(fmt, *info)
           end
+
           io_out.printf(fmt, *sep)
           io_out.puts("Total: #{feed_info.count}")
         end

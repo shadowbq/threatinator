@@ -1,6 +1,7 @@
 provider "emergingthreats"
 name "openbadlist_ip_reputation"
 fetch_http('https://raw.githubusercontent.com/EmergingThreats/et-open-bad-ip-list/master/IPs.txt')
+event_types [:c2]
 
 filter_whitespace
 filter_comments
@@ -14,7 +15,7 @@ end
 parse_eachline(:separator => "\n") do |event_generator, record|
   fields = record.data.split(/; /)
   next if record.nil?
-  
+
   # date = fields[0]
   ip = fields[1]
   # description = fields[2]
@@ -26,7 +27,7 @@ parse_eachline(:separator => "\n") do |event_generator, record|
     puts ip
     next
   end
-  
+
   event_generator.call() do |event|
     event.type = :c2
     event.add_ipv4(ip) do |ipv4_event|

@@ -1,6 +1,7 @@
 provider "falconcrest"
 name "ip_reputation"
 fetch_http('http://www.falconcrest.eu/IPBL.aspx')
+event_types [:spamming]
 
 parse_xml("//td/span") do |event_generator, record|
   node = record.node

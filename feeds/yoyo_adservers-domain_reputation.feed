@@ -1,6 +1,7 @@
 provider "yoyo"
 name "adservers"
 fetch_http('http://pgl.yoyo.org/adservers/serverlist.php?hostformat=nohtml')
+event_types [:scanning]
 
 filter_whitespace
 filter_comments

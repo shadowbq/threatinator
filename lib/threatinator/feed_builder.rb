@@ -23,6 +23,11 @@ module Threatinator
       self
     end
 
+    def event_types(event_types=[:notlabeled])
+      @event_types = event_types
+      self
+    end
+
     def fetch_http(url, opts = {})
       opts[:url] = url
       @fetcher_builder = lambda do
@@ -83,7 +88,7 @@ module Threatinator
       @filter_builders << lambda { Threatinator::Filters::Whitespace.new }
       self
     end
-    
+
     # Filter out whitespace lines. Only works on line-based text.
     def filter_comments
       @filter_builders ||= []
@@ -106,8 +111,9 @@ module Threatinator
 
     def build
       Feed.new(
-        :provider => @provider, 
+        :provider => @provider,
         :name => @name,
+        :event_types => @event_types,
         :parser_block => @parser_block,
         :fetcher_builder => @fetcher_builder,
         :parser_builder => @parser_builder,
@@ -120,7 +126,7 @@ module Threatinator
     # @param [String] filename The name of the file to read the feed from
     # @raise [FeedFileNotFoundError] if the file is not found
     def self.from_file(filename)
-      begin 
+      begin
         filedata = File.read(filename)
       rescue Errno::ENOENT
         raise Threatinator::Exceptions::FeedFileNotFoundError.new(filename)
@@ -130,8 +136,8 @@ module Threatinator
 
     # Generates a builder from a string via eval.
     # @param [String] str The DSL code that specifies the feed.
-    # @param [String] filename (nil) Passed to eval. 
-    # @param [String] lineno (nil) Passed to eval. 
+    # @param [String] filename (nil) Passed to eval.
+    # @param [String] lineno (nil) Passed to eval.
     # @raise [FeedFileNotFoundError] if the file is not found
     # @see Kernel#eval for details on filename and lineno
     def self.from_string(str, filename = nil, lineno = nil)
@@ -153,4 +159,3 @@ module Threatinator
     end
   end
 end
-

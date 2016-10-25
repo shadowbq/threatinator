@@ -1,6 +1,8 @@
 provider "mirc"
 name "domain_reputation"
 fetch_http('http://www.mirc.com/servers.ini')
+event_types [:c2]
+
 
 feed_re = /^n[0-9]+=(?<desc1>[^:]+)SERVER:(?<domain>[^:]+):(?<portlist>[^:]+):?GROUP:(?<group>.*)$/
 
@@ -11,7 +13,7 @@ filter_comments
 filter do |record|
   !(record.data =~ /\:/)
   end
-  
+
 # Filter out //comments
 filter do |record|
   (record.data =~ /^\;/)

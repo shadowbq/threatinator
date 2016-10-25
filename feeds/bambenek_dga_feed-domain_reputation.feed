@@ -1,6 +1,7 @@
 provider "bambenek"
 name "dga_feed"
 fetch_http('http://osint.bambenekconsulting.com/feeds/dga-feed.txt')
+event_types [:c2]
 
 filter do |record|
   record.data[:domain].start_with?("#")
