@@ -27,6 +27,7 @@ group :test do
   gem 'rspec-its', '~> 1.0'
   gem 'webmock', '~> 1.0'
   gem 'factory_girl', '~> 4.0'
+  gem 'codeclimate-test-reporter'
 end
 
 group :development do

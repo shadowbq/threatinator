@@ -2,6 +2,17 @@
 
 Threatinator is a ruby library for parsing threat data feeds.
 
+## Code Status
+
+[![Build Status](https://travis-ci.org/shadowbq/shadowbq-threatinator.svg?branch=master)](https://travis-ci.org/shadowbq/shadowbq-threatinator)
+[![Code Climate](https://codeclimate.com/github/shadowbq/shadowbq-threatinator/badges/gpa.svg)](https://codeclimate.com/github/shadowbq/shadowbq-threatinator)
+[![Test Coverage](https://codeclimate.com/github/shadowbq/shadowbq-threatinator/badges/coverage.svg)](https://codeclimate.com/github/shadowbq/shadowbq-threatinator)
+[![Gem Version](https://badge.fury.io/rb/shadowbq-threatinator.png)](http://badge.fury.io/rb/shadowbq-threatinator)
+[![Tags](https://img.shields.io/github/tag/shadowbq/threatinator.svg)](https://github.com/shadowbq/threatinator/releases)
+
+
+## Fork
+
 This is a fork published as `shadowbq-threatinator`
 
 ## Source code repository
