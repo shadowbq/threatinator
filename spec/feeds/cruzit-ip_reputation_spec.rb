@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/cruzit-ip_reputation.feed', :feed do
   let(:provider) { 'cruzit' }
   let(:name) { 'ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://www.cruzit.com/xwbl2txt.php'
 
@@ -43,5 +45,3 @@ describe 'feeds/cruzit-ip_reputation.feed', :feed do
     end
   end
 end
-
-

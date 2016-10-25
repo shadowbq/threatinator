@@ -3,7 +3,8 @@ require 'spec_helper'
 describe 'feeds/alienvault-ip_reputation.feed', :feed do
   let(:provider) { 'alienvault' }
   let(:name) { 'ip_reputation' }
-
+  let(:event_types) { [:scanning]}
+  
   it_fetches_url 'https://reputation.alienvault.com/reputation.generic'
 
   describe_parsing_the_file feed_data('alienvault-ip_reputation.txt') do
@@ -43,5 +44,3 @@ describe 'feeds/alienvault-ip_reputation.feed', :feed do
     end
   end
 end
-
-

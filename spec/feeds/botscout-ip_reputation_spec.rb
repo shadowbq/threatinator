@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/botscout-ip_reputation.feed', :feed do
   let(:provider) { 'botscout' }
   let(:name) { 'ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://botscout.com/last_caught_cache.htm'
 
@@ -46,5 +48,3 @@ describe 'feeds/botscout-ip_reputation.feed', :feed do
     end
   end
 end
-
-

@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/openbl-ip_reputation.feed', :feed do
   let(:provider) { 'openbl' }
   let(:name) { 'ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://www.openbl.org/lists/base.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/openbl-ip_reputation.feed', :feed do
     end
   end
 end
-
-

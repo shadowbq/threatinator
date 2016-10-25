@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'feeds/arbor_ssh-ip_reputation.feed', :feed do
   let(:provider) { 'arbor' }
   let(:name) { 'ssh_ip_reputation' }
+  let(:event_types) { [:scanning]}
 
   it_fetches_url 'http://atlas-public.ec2.arbor.net/public/ssh_attackers'
 
@@ -43,5 +44,3 @@ describe 'feeds/arbor_ssh-ip_reputation.feed', :feed do
     end
   end
 end
-
-

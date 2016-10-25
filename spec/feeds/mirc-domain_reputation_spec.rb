@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/mirc-domain_reputation.feed', :feed do
   let(:provider) { 'mirc' }
   let(:name) { 'domain_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://www.mirc.com/servers.ini'
 
@@ -43,5 +45,3 @@ describe 'feeds/mirc-domain_reputation.feed', :feed do
     end
   end
 end
-
-

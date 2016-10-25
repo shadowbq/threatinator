@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/yoyo_adservers-domain_reputation.feed', :feed do
   let(:provider) { 'yoyo' }
   let(:name) { 'adservers' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://pgl.yoyo.org/adservers/serverlist.php?hostformat=nohtml'
 
@@ -43,5 +45,3 @@ describe 'feeds/yoyo_adservers-domain_reputation.feed', :feed do
     end
   end
 end
-
-

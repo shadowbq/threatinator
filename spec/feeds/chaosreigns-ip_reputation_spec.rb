@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/chaosreigns-ip_reputation.feed', :feed do
   let(:provider) { 'chaosreigns' }
   let(:name) { 'ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://www.chaosreigns.com/iprep/iprep.txt'
 
@@ -46,5 +48,3 @@ describe 'feeds/chaosreigns-ip_reputation.feed', :feed do
     end
   end
 end
-
-

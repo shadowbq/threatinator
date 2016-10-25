@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/nothink_ssh-ip_reputation.feed', :feed do
   let(:provider) { 'nothink' }
   let(:name) { 'ssh_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://www.nothink.org/blacklist/blacklist_ssh_day.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/nothink_ssh-ip_reputation.feed', :feed do
     end
   end
 end
-
-

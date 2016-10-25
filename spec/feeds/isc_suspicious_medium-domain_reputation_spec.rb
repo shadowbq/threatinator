@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/isc_suspicious_medium-domain_reputation.feed', :feed do
   let(:provider) { 'isc' }
   let(:name) { 'suspicious_medium_domain_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'https://isc.sans.edu/feeds/suspiciousdomains_Medium.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/isc_suspicious_medium-domain_reputation.feed', :feed do
     end
   end
 end
-
-

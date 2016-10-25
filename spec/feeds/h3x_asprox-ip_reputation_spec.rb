@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/h3x_asprox.feed', :feed do
   let(:provider) { 'h3x' }
   let(:name) { 'asprox' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://atrack.h3x.eu/api/asprox_all.php'
 
@@ -46,5 +48,3 @@ describe 'feeds/h3x_asprox.feed', :feed do
     end
   end
 end
-
-

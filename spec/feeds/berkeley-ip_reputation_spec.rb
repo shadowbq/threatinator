@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/berkeley-ip_reputation.feed', :feed do
   let(:provider) { 'berkeley' }
   let(:name) { 'ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'https://security.berkeley.edu/aggressive_ips/ips'
 
@@ -43,5 +45,3 @@ describe 'feeds/berkeley-ip_reputation.feed', :feed do
     end
   end
 end
-
-

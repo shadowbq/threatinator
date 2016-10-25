@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/packetmail_perimeterbad-ip_reputation.feed', :feed do
   let(:provider) { 'packetmail' }
   let(:name) { 'perimeterbad_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'https://www.packetmail.net/iprep_perimeterbad.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/packetmail_perimeterbad-ip_reputation.feed', :feed do
     end
   end
 end
-
-

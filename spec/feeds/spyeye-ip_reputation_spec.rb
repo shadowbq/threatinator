@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/spyeye-ip_reputation.feed', :feed do
   let(:provider) { 'abuse_ch' }
   let(:name) { 'spyeye_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'https://spyeyetracker.abuse.ch/blocklist.php?download=ipblocklist'
 
@@ -43,5 +45,3 @@ describe 'feeds/spyeye-ip_reputation.feed', :feed do
     end
   end
 end
-
-

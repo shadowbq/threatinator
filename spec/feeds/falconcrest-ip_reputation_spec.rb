@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/falconcrest-ip_reputation.feed', :feed do
   let(:provider) { 'falconcrest' }
   let(:name) { 'ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://www.falconcrest.eu/IPBL.aspx'
 
@@ -27,7 +29,7 @@ describe 'feeds/falconcrest-ip_reputation.feed', :feed do
       describe "the event for record 0" do
         let(:record) { records[0] }
         let(:event) { events[0].first }
-        subject { event } 
+        subject { event }
 
         its(:type) { is_expected.to be(:spamming) }
         its(:ipv4s) { is_expected.to  eq(build(:ipv4s, values: ['175.44.5.227'])) }

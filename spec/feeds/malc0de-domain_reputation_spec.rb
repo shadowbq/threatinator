@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/malc0de-domain_reputation.feed', :feed do
   let(:provider) { 'malc0de' }
   let(:name) { 'domain_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://malc0de.com/bl/BOOT'
 
@@ -43,5 +45,3 @@ describe 'feeds/malc0de-domain_reputation.feed', :feed do
     end
   end
 end
-
-

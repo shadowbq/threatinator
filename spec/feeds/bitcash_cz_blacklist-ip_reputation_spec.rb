@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/bitcash_cz_blacklist.feed', :feed do
   let(:provider) { 'bitcash_cz' }
   let(:name) { 'blacklist' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://bitcash.cz/misc/log/blacklist'
 
@@ -46,5 +48,3 @@ describe 'feeds/bitcash_cz_blacklist.feed', :feed do
     end
   end
 end
-
-

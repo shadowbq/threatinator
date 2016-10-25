@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/vxvault-url_reputation.feed', :feed do
   let(:provider) { 'vxvault' }
   let(:name) { 'url_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://vxvault.siri-urz.net/URL_List.php'
 
@@ -46,5 +48,3 @@ describe 'feeds/vxvault-url_reputation.feed', :feed do
     end
   end
 end
-
-

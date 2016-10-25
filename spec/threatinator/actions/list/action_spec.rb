@@ -11,58 +11,60 @@ describe Threatinator::Actions::List::Action do
   shared_examples_for 'table output' do
     describe "the header row, header separator, and footer separator" do
       it "should vary the width of 'provider' based on the longest provider name" do
+
         1.upto(3) do |i|
-          feed_registry.register(build(:feed, :http, url: "http://#{i}", name:i.to_s, provider: ('A' * (10 * i))))
+          feed_registry.register(build(:feed, :http, url: "http://#{i}", name:i.to_s, provider: ('A' * (10 * i)), event_types: [:unknown]))
         end
 
         output = temp_stdout do
           action.exec
         end
         lines = output.lines.to_a
-        expect(lines[0]).to eq("provider                        name  type  link/path\n")
-        expect(lines[1]).to eq("------------------------------  ----  ----  ---------\n")
-        expect(lines[-2]).to eq("------------------------------  ----  ----  ---------\n")
+
+        expect(lines[0]).to eq("provider                        name  type  link/path event_types\n")
+        expect(lines[1]).to eq("------------------------------  ----  ----  --------- -----------\n")
+        expect(lines[-2]).to eq("------------------------------  ----  ----  --------- -----------\n")
       end
 
       it "should vary the width of 'name' based on the longest feed name" do
         1.upto(3) do |i|
-          feed_registry.register(build(:feed, :http, url: "http://#{i}", provider:i.to_s, name: ('A' * (10 * i))))
+          feed_registry.register(build(:feed, :http, url: "http://#{i}", provider:i.to_s, name: ('A' * (10 * i)), event_types: [:unknown]))
         end
 
         output = temp_stdout do
           action.exec
         end
         lines = output.lines.to_a
-        expect(lines[0]).to eq("provider  name                            type  link/path\n")
-        expect(lines[1]).to eq("--------  ------------------------------  ----  ---------\n")
-        expect(lines[-2]).to eq("--------  ------------------------------  ----  ---------\n")
+        expect(lines[0]).to eq("provider  name                            type  link/path event_types\n")
+        expect(lines[1]).to eq("--------  ------------------------------  ----  --------- -----------\n")
+        expect(lines[-2]).to eq("--------  ------------------------------  ----  --------- -----------\n")
       end
 
       it "should vary the width of 'link/path' based on the longest link name" do
         1.upto(3) do |i|
-          feed_registry.register(build(:feed, :http, url: 'http://' + ('A' * (i * 10)), provider:i.to_s,name:i.to_s))
+          feed_registry.register(build(:feed, :http, url: 'http://' + ('A' * (i * 10)), provider:i.to_s,name:i.to_s, event_types: [:unknown]))
         end
 
         output = temp_stdout do
           action.exec
         end
         lines = output.lines.to_a
-        expect(lines[0]).to eq("provider  name  type  link/path                            \n")
-        expect(lines[1]).to eq("--------  ----  ----  -------------------------------------\n")
-        expect(lines[-2]).to eq("--------  ----  ----  -------------------------------------\n")
+        expect(lines[0]).to eq("provider  name  type  link/path                             event_types\n")
+        expect(lines[1]).to eq("--------  ----  ----  ------------------------------------- -----------\n")
+        expect(lines[-2]).to eq("--------  ----  ----  ------------------------------------- -----------\n")
       end
     end
 
     describe "the list of feeds" do
       it "should be sorted by provider name and then feed name" do
-        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_c' ))
-        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_d' ))
-        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_a' ))
-        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_d' ))
-        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_c' ))
-        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_a' ))
-        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_b' ))
-        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_b' ))
+        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_c', event_types: [:unknown] ))
+        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_d', event_types: [:unknown] ))
+        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_a', event_types: [:unknown] ))
+        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_d', event_types: [:unknown] ))
+        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_c', event_types: [:unknown] ))
+        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_a', event_types: [:unknown] ))
+        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_b', event_types: [:unknown] ))
+        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_b', event_types: [:unknown] ))
 
         output = temp_stdout do
           action.exec
@@ -96,14 +98,14 @@ describe Threatinator::Actions::List::Action do
   shared_examples_for 'json output' do
     describe "the output" do
       it "should be sorted by provider name and then feed name" do
-        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_c' ))
-        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_d' ))
-        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_a' ))
-        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_d' ))
-        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_c' ))
-        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_a' ))
-        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_b' ))
-        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_b' ))
+        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_c', event_types: [:unknown] ))
+        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_d', event_types: [:unknown] ))
+        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_a', event_types: [:unknown] ))
+        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_d', event_types: [:unknown] ))
+        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_c', event_types: [:unknown] ))
+        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_a', event_types: [:unknown] ))
+        feed_registry.register(build(:feed, provider: 'provider_b', name: 'feed_b', event_types: [:unknown] ))
+        feed_registry.register(build(:feed, provider: 'provider_a', name: 'feed_b', event_types: [:unknown] ))
 
         output = temp_stdout do
           action.exec

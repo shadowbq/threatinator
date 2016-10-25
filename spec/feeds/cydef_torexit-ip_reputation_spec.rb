@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/cydef_torexit-ip_reputation.feed', :feed do
   let(:provider) { 'cydef' }
   let(:name) { 'torexit_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'https://cydef.us/torexit.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/cydef_torexit-ip_reputation.feed', :feed do
     end
   end
 end
-
-

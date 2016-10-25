@@ -12,6 +12,7 @@ gem 'addressable', '~> 2.3'
 gem 'log4r', '~> 1.1'
 gem 'ruby-ip', '~> 0.9.3'
 gem 'bunny', '~> 2.5'
+gem 'domain_name_validator', '~> 0.5'
 
 platforms :mingw, :mswin, :ruby do
   gem 'oj', '~> 2.9'
@@ -31,4 +32,6 @@ end
 group :development do
   gem 'jeweler', '~> 2.0'
   gem 'pry', '~> 0.10.0'
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
 end

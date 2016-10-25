@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/dan_me_uk_torlist-ip_reputation.feed', :feed do
   let(:provider) { 'dan_me_uk' }
   let(:name) { 'torlist_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'https://www.dan.me.uk/torlist/'
 
@@ -43,5 +45,3 @@ describe 'feeds/dan_me_uk_torlist-ip_reputation.feed', :feed do
     end
   end
 end
-
-

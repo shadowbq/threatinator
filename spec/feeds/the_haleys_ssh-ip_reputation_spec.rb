@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/the_haleys_ssh-ip_reputation.feed', :feed do
   let(:provider) { 'the_haleys' }
   let(:name) { 'ssh_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://charles.the-haleys.org/ssh_dico_attack_hdeny_format.php/hostsdeny.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/the_haleys_ssh-ip_reputation.feed', :feed do
     end
   end
 end
-
-

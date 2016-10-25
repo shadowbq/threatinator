@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/palevo-domain_reputation.feed', :feed do
   let(:provider) { 'abuse_ch' }
   let(:name) { 'palevo_domain_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'https://palevotracker.abuse.ch/blocklists.php?download=domainblocklist'
 
@@ -43,5 +45,3 @@ describe 'feeds/palevo-domain_reputation.feed', :feed do
     end
   end
 end
-
-

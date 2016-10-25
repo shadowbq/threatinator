@@ -19,7 +19,7 @@ module Threatinator
     def initialize(opts = {})
       @provider = opts.delete(:provider)
       @name = opts.delete(:name)
-      @event_types = opts.delete(:event_types)
+      @event_types = opts.delete(:event_types) || [:uknown]
       @parser_block = opts.delete(:parser_block)
 
       @parser_builder = opts.delete(:parser_builder)

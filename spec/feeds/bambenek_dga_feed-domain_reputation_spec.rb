@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/bambenek_dga_feed-domain_reputation.feed', :feed do
   let(:provider) { 'bambenek' }
   let(:name) { 'dga_feed' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://osint.bambenekconsulting.com/feeds/dga-feed.txt'
 
@@ -35,5 +37,3 @@ describe 'feeds/bambenek_dga_feed-domain_reputation.feed', :feed do
     end
   end
 end
-
-

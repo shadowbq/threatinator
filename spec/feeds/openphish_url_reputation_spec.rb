@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/openphish-url_reputation.feed', :feed do
   let(:provider) { 'openphish' }
   let(:name) { 'url_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://openphish.com/feed.txt'
 
@@ -46,5 +48,3 @@ describe 'feeds/openphish-url_reputation.feed', :feed do
     end
   end
 end
-
-

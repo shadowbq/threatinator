@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/ET_block-ip_reputation.feed', :feed do
   let(:provider) { 'emergingthreats' }
   let(:name) { 'block_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://rules.emergingthreats.net/fwrules/emerging-Block-IPs.txt'
 
@@ -46,5 +48,3 @@ describe 'feeds/ET_block-ip_reputation.feed', :feed do
     end
   end
 end
-
-

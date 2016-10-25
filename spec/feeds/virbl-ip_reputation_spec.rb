@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/virbl-ip_reputation.feed', :feed do
   let(:provider) { 'virbl' }
   let(:name) { 'ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://virbl.org/download/virbl.dnsbl.bit.nl.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/virbl-ip_reputation.feed', :feed do
     end
   end
 end
-
-

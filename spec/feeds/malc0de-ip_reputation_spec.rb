@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/malc0de-ip_reputation.feed', :feed do
   let(:provider) { 'malc0de' }
   let(:name) { 'ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://malc0de.com/bl/IP_Blacklist.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/malc0de-ip_reputation.feed', :feed do
     end
   end
 end
-
-

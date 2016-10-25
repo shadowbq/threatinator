@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'feeds/autoshun_shunlist.feed', :feed do
   let(:provider) { 'autoshun' }
   let(:name) { 'shunlist' }
+  let(:event_types) { [:scanning]}
 
   it_fetches_url 'http://www.autoshun.org/files/shunlist.csv'
 
@@ -35,5 +36,3 @@ describe 'feeds/autoshun_shunlist.feed', :feed do
     end
   end
 end
-
-

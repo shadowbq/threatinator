@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/feodo-ip_reputation.feed', :feed do
   let(:provider) { 'abuse_ch' }
   let(:name) { 'feodo_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'https://feodotracker.abuse.ch/blocklist.php?download=ipblocklist'
 
@@ -43,5 +45,3 @@ describe 'feeds/feodo-ip_reputation.feed', :feed do
     end
   end
 end
-
-

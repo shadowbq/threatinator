@@ -24,7 +24,7 @@ module Threatinator
     end
 
     def event_types(event_types=[:notlabeled])
-      @event_types = event_types
+      @event_types ||= event_types
       self
     end
 
@@ -37,16 +37,16 @@ module Threatinator
       self
     end
 
-  def parse_xml(pattern_string, opts = {}, &block)
-    @parser_builder = lambda do
-      pattern = Threatinator::Parsers::XML::Pattern.new(pattern_string)
-      opts_dup = Marshal.load(Marshal.dump(opts))
-      opts_dup[:pattern] = pattern
-      Threatinator::Parsers::XML::Parser.new(opts_dup, &block)
+    def parse_xml(pattern_string, opts = {}, &block)
+      @parser_builder = lambda do
+        pattern = Threatinator::Parsers::XML::Pattern.new(pattern_string)
+        opts_dup = Marshal.load(Marshal.dump(opts))
+        opts_dup[:pattern] = pattern
+        Threatinator::Parsers::XML::Parser.new(opts_dup, &block)
+      end
+      @parser_block = block
+      self
     end
-    @parser_block = block
-    self
-  end
 
     def parse_json(opts = {}, &block)
       @parser_builder = lambda do
@@ -113,7 +113,7 @@ module Threatinator
       Feed.new(
         :provider => @provider,
         :name => @name,
-        :event_types => @event_types,
+        :event_types => @event_types || [:unknown],
         :parser_block => @parser_block,
         :fetcher_builder => @fetcher_builder,
         :parser_builder => @parser_builder,

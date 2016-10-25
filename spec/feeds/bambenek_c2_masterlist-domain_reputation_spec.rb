@@ -3,6 +3,7 @@ require 'spec_helper'
 describe 'feeds/bambenek_c2_masterlist-domain_reputation.feed', :feed do
   let(:provider) { 'bambenek' }
   let(:name) { 'c2_masterlist' }
+  let(:event_types) { [:scanning]}
 
   it_fetches_url 'http://osint.bambenekconsulting.com/feeds/c2-dommasterlist.txt'
 
@@ -35,5 +36,3 @@ describe 'feeds/bambenek_c2_masterlist-domain_reputation.feed', :feed do
     end
   end
 end
-
-

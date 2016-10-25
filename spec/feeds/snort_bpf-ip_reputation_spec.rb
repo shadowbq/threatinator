@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/snort_bpf-ip_reputation.feed', :feed do
   let(:provider) { 'snort' }
   let(:name) { 'bpf_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://labs.snort.org/feeds/ip-filter.blf'
 
@@ -43,5 +45,3 @@ describe 'feeds/snort_bpf-ip_reputation.feed', :feed do
     end
   end
 end
-
-

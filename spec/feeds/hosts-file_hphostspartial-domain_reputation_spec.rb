@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/hosts-file_hphostspartial-domain_reputation.feed', :feed do
   let(:provider) { 'hosts-file' }
   let(:name) { 'hphostspartial_domain_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://hosts-file.net/hphosts-partial.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/hosts-file_hphostspartial-domain_reputation.feed', :feed do
     end
   end
 end
-
-

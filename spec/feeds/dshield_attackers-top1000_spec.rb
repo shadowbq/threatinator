@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/dshield_attackers-top1000.feed', :feed do
   let(:provider) { 'dshield' }
   let(:name) { 'attackers-top1000' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'https://isc.sans.edu/api/sources/attacks/1000/'
 
@@ -27,7 +29,7 @@ describe 'feeds/dshield_attackers-top1000.feed', :feed do
       describe "the event for record 0" do
         let(:record) { records[0] }
         let(:event) { events[0].first }
-        subject { event } 
+        subject { event }
 
         its(:type) { is_expected.to be(:attacker) }
         its(:ipv4s) { is_expected.to  eq(build(:ipv4s, values: ['150.164.82.10'])) }
@@ -35,6 +37,3 @@ describe 'feeds/dshield_attackers-top1000.feed', :feed do
     end
   end
 end
-
-
-

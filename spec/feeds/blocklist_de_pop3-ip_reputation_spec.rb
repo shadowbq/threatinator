@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/blocklist_de_pop3-ip_reputation.feed', :feed do
   let(:provider) { 'blocklist_de' }
   let(:name) { 'pop3_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://www.blocklist.de/lists/pop3.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/blocklist_de_pop3-ip_reputation.feed', :feed do
     end
   end
 end
-
-

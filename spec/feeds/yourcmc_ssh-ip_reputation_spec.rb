@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/yourcmc_ssh-ip_reputation.feed', :feed do
   let(:provider) { 'yourcmc' }
   let(:name) { 'ssh-ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://vmx.yourcmc.ru/BAD_HOSTS.IP4'
 
@@ -43,5 +45,3 @@ describe 'feeds/yourcmc_ssh-ip_reputation.feed', :feed do
     end
   end
 end
-
-

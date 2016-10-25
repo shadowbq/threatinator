@@ -3,7 +3,8 @@ require 'spec_helper'
 describe 'feeds/arbor_fastflux-domain_reputation.feed', :feed do
   let(:provider) { 'arbor' }
   let(:name) { 'fastflux_domain_reputation' }
-
+  let(:event_types) { [:scanning]}
+  
   it_fetches_url 'http://atlas.arbor.net/summary/domainlist'
 
   describe_parsing_the_file feed_data('arbor_domainlist.txt') do
@@ -43,5 +44,3 @@ describe 'feeds/arbor_fastflux-domain_reputation.feed', :feed do
     end
   end
 end
-
-

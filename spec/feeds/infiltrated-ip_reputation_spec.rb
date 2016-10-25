@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/infiltrated-ip_reputation.feed', :feed do
   let(:provider) { 'infiltrated' }
   let(:name) { 'ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://www.infiltrated.net/blacklisted'
 
@@ -43,5 +45,3 @@ describe 'feeds/infiltrated-ip_reputation.feed', :feed do
     end
   end
 end
-
-

@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/t-arend-de_ssh-ip_reputation.feed', :feed do
   let(:provider) { 't-arend-de' }
   let(:name) { 'ssh_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://www.t-arend.de/linux/badguys.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/t-arend-de_ssh-ip_reputation.feed', :feed do
     end
   end
 end
-
-

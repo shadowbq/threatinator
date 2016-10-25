@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/cert_mxpoison-ip_reputation.feed', :feed do
   let(:provider) { 'cert' }
   let(:name) { 'mxpoison_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://www.cert.org/downloads/mxlist.ips.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/cert_mxpoison-ip_reputation.feed', :feed do
     end
   end
 end
-
-

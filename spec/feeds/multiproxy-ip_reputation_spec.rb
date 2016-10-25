@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/multiproxy-ip_reputation.feed', :feed do
   let(:provider) { 'multiproxy' }
   let(:name) { 'ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://multiproxy.org/txt_all/proxy.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/multiproxy-ip_reputation.feed', :feed do
     end
   end
 end
-
-

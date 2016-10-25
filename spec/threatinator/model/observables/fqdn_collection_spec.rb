@@ -27,7 +27,6 @@ describe Threatinator::Model::Observables::FqdnCollection do
 
     context "when provided an invalid FQDN string" do
       it "returns false" do
-        pending "doesn't actually validate fqdns, yet"
         expect(collection.valid_member?("yahoo..com")).to eq(false)
       end
     end

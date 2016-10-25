@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/ET_compromised-ip_reputation.feed', :feed do
   let(:provider) { 'emergingthreats' }
   let(:name) { 'compromised_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://rules.emergingthreats.net/open/suricata/rules/compromised-ips.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/ET_compromised-ip_reputation.feed', :feed do
     end
   end
 end
-
-

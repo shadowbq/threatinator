@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/danger_bruteforce-ip_reputation.feed', :feed do
   let(:provider) { 'danger' }
   let(:name) { 'bruteforce_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://danger.rulez.sk/projects/bruteforceblocker/blist.php'
 
@@ -43,5 +45,3 @@ describe 'feeds/danger_bruteforce-ip_reputation.feed', :feed do
     end
   end
 end
-
-

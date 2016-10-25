@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/sigmaproject_spyware.feed', :feed do
   let(:provider) { 'sigmaproject' }
   let(:name) { 'spyware_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'https://blocklist.sigmaprojects.org/api.cfc?method=getList&lists=spyware'
 
@@ -27,14 +29,14 @@ describe 'feeds/sigmaproject_spyware.feed', :feed do
       describe "the event for record 0" do
         let(:record) { records[0] }
         let(:event) { events[0].first }
-        subject { event } 
+        subject { event }
 
         its(:type) { is_expected.to be(:c2) }
         its(:ipv4s) { is_expected.to  eq(build(:ipv4s, values: ['2.60.13.132'])) }
       end
     end
   end
-  
+
   describe_parsing_a_record '2.60.13.132/32' do
     it "should have parsed" do
       expect(status).to eq(:parsed)
@@ -59,6 +61,3 @@ describe 'feeds/sigmaproject_spyware.feed', :feed do
   end
 
 end
-
-
-

@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/ciarmy-ip_reputation.feed', :feed do
   let(:provider) { 'ciarmy' }
   let(:name) { 'ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'http://www.ciarmy.com/list/ci-badguys.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/ciarmy-ip_reputation.feed', :feed do
     end
   end
 end
-
-

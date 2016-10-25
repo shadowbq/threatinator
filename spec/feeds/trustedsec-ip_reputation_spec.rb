@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/trustedsec-ip_reputation.feed', :feed do
   let(:provider) { 'trustedsec' }
   let(:name) { 'ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'https://www.trustedsec.com/banlist.txt'
 
@@ -43,5 +45,3 @@ describe 'feeds/trustedsec-ip_reputation.feed', :feed do
     end
   end
 end
-
-

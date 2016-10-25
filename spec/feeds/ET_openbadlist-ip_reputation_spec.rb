@@ -3,6 +3,8 @@ require 'spec_helper'
 describe 'feeds/ET_openbadlist-ip_reputation.feed', :feed do
   let(:provider) { 'emergingthreats' }
   let(:name) { 'openbadlist_ip_reputation' }
+  let(:event_types) { [:scanning]}
+
 
   it_fetches_url 'https://raw.githubusercontent.com/EmergingThreats/et-open-bad-ip-list/master/IPs.txt'
 
@@ -52,5 +54,3 @@ describe 'feeds/ET_openbadlist-ip_reputation.feed', :feed do
     end
   end
 end
-
-
