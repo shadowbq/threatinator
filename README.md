@@ -19,13 +19,29 @@ This is a fork published as `shadowbq-threatinator`
 
 The repository is located at: https://github.com/shadowbq/threatinator
 
-## Development
+## Installation
 
-First, set up your dependencies.
+Install from Gem
 
 ```
+gem install shadowbq-threatinator
+```
+
+`threatinator` will be located in your $PATH if installed from gem.
+
+-OR-
+
+Install from Source.
+
+```
+git clone https://github.com/shadowbq/threatinator
+cd threatinator
 bundle install
 ```
+
+Bundler context 
+
+`bundle exec bin/threatinator` is used if not running from an installed gem.
 
 ### Listing feeds
 
@@ -99,3 +115,7 @@ Copyright (C) 2014 Michael Ryan (github.com/justfalter)
 Original code: https://github.com/cikl/threatinator
 
 See the LICENSE file for license rights and limitations (LGPLv3).
+
+See the CHANGE LOG for significant changes made to software.
+
+LGPLv3 in Plain English - https://tldrlegal.com/license/gnu-lesser-general-public-license-v3-(lgpl-3)
