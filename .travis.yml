@@ -5,22 +5,8 @@ rvm:
 - 2.2.5
 - 2.3.1
 - ruby-head
-- jruby-head
-jdk:
-  - openjdk7
-  - oraclejdk8
 matrix:
-  exclude:
-    - rvm: 2.1.9
-      jdk: oraclejdk8
-    - rvm: 2.2.5
-      jdk: oraclejdk8
-    - rvm: 2.3.1
-      jdk: oraclejdk8
-    - rvm: ruby-head
-      jdk: oraclejdk8
   allow_failures:
-  - rvm: jruby-head
   - rvm: ruby-head
 env:
   global:
