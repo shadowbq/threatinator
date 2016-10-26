@@ -20,7 +20,7 @@ module Threatinator
       @data[key] = object
     end
 
-    # @param [Object] key 
+    # @param [Object] key
     # @return [Object]
     def get(key)
       @data[key]
@@ -50,4 +50,3 @@ module Threatinator
     end
   end
 end
-

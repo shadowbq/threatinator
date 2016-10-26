@@ -25,6 +25,8 @@ module Threatinator
         end
 
         def handle_event(event)
+          # Routing keys are dynamic event_types 
+          #@routing_key = config.routing_key || 'threatinator.' + event.type.to_s
           @routing_key = 'threatinator.' + event.type.to_s
           @exchange.publish(MultiJson.dump(event.to_serializable_hash),
                             routing_key: @routing_key)

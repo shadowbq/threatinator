@@ -8,8 +8,8 @@ module Threatinator
         class Config < Threatinator::Output::Config
           attribute :url, String, description: "The hostname/ip of the RabbitMQ server"
 
-          attribute :routing_key, String, default: lambda { |c,a| 'amqp.event' },
-            description: "Routing key for Amqp events"
+          # attribute :routing_key, String, default: 'threatinator.generic',
+          #  description: "Routing key for Amqp events"
 
         end
       end
