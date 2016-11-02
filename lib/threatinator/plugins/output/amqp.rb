@@ -1,7 +1,7 @@
 require 'threatinator/output'
 require 'bunny'
 require 'multi_json'
-require 'pry'
+
 # bundle exec threatinator run --run.output.amqp.url=#{ENV['RABBITMQ_URL']} --run.output.format=amqp #{provider} #{name}"
 #    --run.output.amqp.routing_key=arg   - Routing key for Amqp events (default: none)
 #    --run.output.amqp.url=arg           - The hostname/ip of the RabbitMQ server (default: none)
@@ -25,7 +25,7 @@ module Threatinator
         end
 
         def handle_event(event)
-          # Routing keys are dynamic event_types 
+          # Routing keys are dynamic event_types
           #@routing_key = config.routing_key || 'threatinator.' + event.type.to_s
           @routing_key = 'threatinator.' + event.type.to_s
           @exchange.publish(MultiJson.dump(event.to_serializable_hash),
